@@ -1,5 +1,11 @@
 "use client"
 
+import {Textarea} from "@nextui-org/react";
+import {Select, SelectItem} from "@nextui-org/react";
+import {servicios} from "./componentes/servicios";
+import {incidencias} from "./componentes/tipo_incidencia";
+import {impactos} from "./componentes/impacto";
+import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
 import React from "react";
 
 
@@ -29,11 +35,12 @@ import {ChevronDownIcon} from "./ChevronDownIcon";
 import {SearchIcon} from "./SearchIcon";
 import {columns, users, statusOptions} from "./data";
 import {capitalize} from "./utils";
+import { Red_Hat_Mono } from "next/font/google";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  Alto: "success",
+  Medio: "danger",
+  Bajo: "warning",
 };
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
@@ -63,7 +70,7 @@ export default function App() {
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...users];
-
+//BUSCADOR
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
         user.toLowerCase().includes(filterValue.toLowerCase()),
@@ -103,14 +110,11 @@ export default function App() {
     switch (columnKey) {
       case "name":
         return (
-          <User
-            //avatarProps={{radius: "lg", src: user.avatar}}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
+            <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+            
+            </div>
+          );
       case "hora":
         return (
           <div className="flex flex-col">
@@ -194,7 +198,7 @@ export default function App() {
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
-                  Status
+                  Impacto
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -233,15 +237,59 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />}>
-              Nueva
-            </Button>
+            <Popover placement="right">
+                <PopoverTrigger>
+                  <Button className="bg-blue-500 text-blue-50">Nueva</Button>
+                </PopoverTrigger>
+              <PopoverContent>
+                <div className="px-1 py-2">
+                <Textarea
+                  label="Analista que reporta"
+                  placeholder="Ingrese el nombre del analista"
+                  className="max-w-xs"
+                />
+                <Select
+                    items={incidencias}
+                    label="Tipo de incidencia"
+                    placeholder="Seleccione el tipo de incidencia"
+                    className="max-w-xs mt-3"
+                  >
+                    {(incidencia) => <SelectItem key={incidencia.value}>{incidencia.label}</SelectItem>}
+                  </Select>
+                <Textarea
+                  label="Descripcion"
+                  placeholder="Ingrese una descripcion de la incidencia"
+                  className="max-w-xs mt-3"
+                />
+                  <Select
+                    items={servicios}
+                    label="Servicios Afectados"
+                    placeholder="Seleccione el servicio afectado"
+                    className="max-w-xs mt-3"
+                  >
+                    {(servicio) => <SelectItem key={servicio.value}>{servicio.label}</SelectItem>}
+                  </Select>
+                  <Select
+                    items={impactos}
+                    label="Impacto"
+                    placeholder="Seleccione el nivel de impacto"
+                    className="max-w-xs mt-3"
+                  >
+                    {(impacto) => <SelectItem key={impacto.value}>{impacto.label}</SelectItem>}
+                  </Select>
+                  <Button color="primary" className="">
+                    Agregar
+                  </Button>
+                  <div className="text-tiny">Reporte de nueva incidencia</div>
+                </div>
+              </PopoverContent>
+             </Popover>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">Total {users.length} incidencias</span>
           <label className="flex items-center text-default-400 text-small">
-            Rows per page:
+            Filas por paginas:
             <select
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
@@ -262,7 +310,7 @@ export default function App() {
         <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
+            : `${selectedKeys.size} de ${filteredItems.length} seleccionado`}
         </span>
         <Pagination
           isCompact
@@ -275,10 +323,10 @@ export default function App() {
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
-            Previous
+            Anterior
           </Button>
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
-            Next
+            Siguiente
           </Button>
         </div>
       </div>

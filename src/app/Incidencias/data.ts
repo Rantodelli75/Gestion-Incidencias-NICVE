@@ -7,100 +7,120 @@ const columns = [
   {name: "ANALISTA", uid: "team"},
   {name: "TIPO DE INCIDENCIA", uid: "tipodeincidencia"},
   {name: "DESCRIPCION", uid: "descripcion"},
-  {name: "SERVICIOS AFECTADOS", uid: "servicios afectados"},
-  {name: "AREAS AFECTADAS", uid: "areas afectadas"},
-  {name: "IMPACTO", uid: "impacto"},
-  {name: "STATUS", uid: "status", sortable: true},
+  {name: "SERVICIOS AFECTADOS", uid: "serviciosafectados"},
+  {name: "AREAS AFECTADAS", uid: "areasafectadas"},
+  {name: "IMPACTO", uid: "status", sortable: true},
   {name: "ACTIONS", uid: "actions"},
 ];
 
 const statusOptions = [
-  {name: "Active", uid: "active"},
-  {name: "Paused", uid: "paused"},
-  {name: "Vacation", uid: "vacation"},
+  {name: "Alta", uid: "alta"},
+  {name: "Medio", uid: "medio"},
+  {name: "Bajo", uid: "bajo"},
 ];
 
 const users = [
   {
     id: 1,
+    name: "20/10/2024",
     team: "Tony Reichert",
     role: "1:00",
-    status: "active",
-    age: "29",
+    status: "alta",
+    age: "19/10/2024",
     email: "1",
-    tipodeincidencia: "hdfg"
+    tipodeincidencia: "Fallo en la zona dns",
+    descripcion: "",
+    serviciosafectados: "aplicativos internos"
   },
   {
     id: 2,
     team: "Zoey Lang",
     role: "2:45",
-    status: "paused",
-    age: "25",
+    status: "medio",
     email: "2",
+    tipodeincidencia: "fallo de la comunicacion en replicas",
+    descripcion: "",
+    serviciosafectados: "firewall seguridad"
   },
   {
     id: 3,
     team: "Jane Fisher",
     role: "3:11",
-    status: "active",
-    age: "22",
+    status: "alta",
     email: "3",
+    tipodeincidencia: "ataque denegacion de servicio",
+    descripcion: "",
+    serviciosafectados: "aplicativo web"
   },
   {
     id: 4,
     team: "William Howard",
     role: "2;47",
-    status: "vacation",
-    age: "28",
+    status: "bajo",
     email: "4",
+    tipodeincidencia: "fallo de hardware",
+    descripcion: "",
+    serviciosafectados: "WHOIS"
   },
   {
     id: 5,
     team: "Kristen Copper",
     role: "6:11",
-    status: "active",
-    age: "24",
+    status: "alta",
     email: "5",
+    tipodeincidencia: "alerta de temperatura data center",
+    descripcion: "",
+    serviciosafectados: "replicas"
   },
   {
     id: 6,
     team: "Brian Kim",
     role: "8:15",
-    age: "29",
     email: "6",
-    status: "Active",
+    status: "alta",
+    tipodeincidencia: "intermitencia de la red",
+    descripcion: "",
+    serviciosafectados: "base de datos"
   },
   {
     id: 7,
     team: "Michael Hunt",
     role: "7:37",
-    status: "paused",
-    age: "27",
+    status: "medio",
     email: "7",
+    tipodeincidencia: "fallo de aplicaciones",
+    descripcion: "",
+    serviciosafectados: "RDAP"
   },
   {
     id: 8,
     team: "Samantha Brooks",
     role: "5:21",
-    status: "active",
-    age: "31",
+    status: "alta",
     email: "8",
+    tipodeincidencia: "lentitud en los tiempos de respuesta",
+    descripcion: "",
+    serviciosafectados: "servidores produccion"
   },
   {
     id: 9,
     team: "Frank Harrison",
     role: "12:23",
-    status: "vacation",
-    age: "33",
+    status: "bajo",
     email: "9",
+    tipodeincidencia: "ataqes web",
+    descripcion: "",
+    serviciosafectados: "correo"
   },
   {
     id: 10,
     team: "Emma Adams",
     role: "3:25",
-    status: "active",
-    age: "35",
+    status: "alta",
     email: "10",
+    tipodeincidencia: "habitual de peticiones",
+    descripcion: "",
+    serviciosafectados: "DNS"
   }
 ];
 
