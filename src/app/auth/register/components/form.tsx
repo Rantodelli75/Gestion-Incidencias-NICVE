@@ -37,7 +37,7 @@ const Form = () => {
         <div className='mb-5'>
           <hr className='border-2' />
           <div className='flex justify-center'>
-            <span className='bg-white px-8 -mt-3'>or</span>
+            <span className='bg-white px-8 -mt-3'></span>
           </div>
         </div>
       </form>

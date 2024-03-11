@@ -1,7 +1,7 @@
 import React from "react";
 const columns = [
   {name: "ID", uid: "id", sortable: true},
-  {name: "FECHA DE REPORTE", uid: "name"},
+  {name: "FECHA DE REPORTE", uid: "date"},
   {name: "FECHA DE INICIO", uid: "age"},
   {name: "HORA", uid: "role"},
   {name: "ANALISTA", uid: "team"},
@@ -14,7 +14,7 @@ const columns = [
 ];
 
 const statusOptions = [
-  {name: "Alta", uid: "alta"},
+  {name: "Alto", uid: "alto"},
   {name: "Medio", uid: "medio"},
   {name: "Bajo", uid: "bajo"},
 ];
@@ -22,10 +22,10 @@ const statusOptions = [
 const users = [
   {
     id: 1,
-    name: "20/10/2024",
+    date: "20/10/2024",
     team: "Tony Reichert",
     role: "1:00",
-    status: "alta",
+    status: "alto",
     age: "19/10/2024",
     email: "1",
     tipodeincidencia: "Fallo en la zona dns",
@@ -46,7 +46,7 @@ const users = [
     id: 3,
     team: "Jane Fisher",
     role: "3:11",
-    status: "alta",
+    status: "alto",
     email: "3",
     tipodeincidencia: "ataque denegacion de servicio",
     descripcion: "",
@@ -66,7 +66,7 @@ const users = [
     id: 5,
     team: "Kristen Copper",
     role: "6:11",
-    status: "alta",
+    status: "alto",
     email: "5",
     tipodeincidencia: "alerta de temperatura data center",
     descripcion: "",
@@ -77,7 +77,7 @@ const users = [
     team: "Brian Kim",
     role: "8:15",
     email: "6",
-    status: "alta",
+    status: "alto",
     tipodeincidencia: "intermitencia de la red",
     descripcion: "",
     serviciosafectados: "base de datos"
