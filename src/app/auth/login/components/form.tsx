@@ -12,7 +12,7 @@ const Form = () => {
   return (
     <div className='w-full max-w-md'>
       <div className='mb-5'>
-        <h2 className='text-2xl font-semibold'>Iniciar sesion</h2>
+        <h2 className='text-2xl font-semibold'>Iniciar sesión</h2>
         <p className='text-gray-500 text-sm'>
             Ingrese su correo y contraseña para ingresar
         </p>
@@ -26,18 +26,18 @@ const Form = () => {
             onClick={() => router.push('/auth/forgot-password')}
             className='text-gray-500 hover:text-primary transition-colors duration-300'
           >
-            olvido su contraseña?
+            ¿Olvidó su contraseña?
           </button>
         </div>
-        <Button type='submit' label='Inciar sesion' />
+        <Button type='submit' label='Inciar sesión' />
         <div className='mt-5 mb-10 flex items-center justify-center gap-x-2'>
-          <p className='text-gray-500'>No tienes cuenta?</p>
+          <p className='text-gray-500'>¿No tienes cuenta?</p>
           <button
             type='button'
             onClick={() => router.push('/auth/register')}
             className='font-semibold hover:text-primary transition-colors duration-300'
           >
-            Registerarte
+            Regístrate
           </button>
         </div>
         <div className='mb-5'>

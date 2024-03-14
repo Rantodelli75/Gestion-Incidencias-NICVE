@@ -3,7 +3,7 @@ import Logo from '@/app/components/shared/logo';
 import Form from './components/form';
 
 export const metadata: Metadata = {
-  title: 'Forgot Password | Auth',
+  title: 'Cambiar Contraseña',
   description: 'Forgot Password | Auth',
 };
 

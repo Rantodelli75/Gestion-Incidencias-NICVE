@@ -3,8 +3,8 @@ import Logo from '@/app/components/shared/logo';
 import Form from './components/form';
 
 export const metadata: Metadata = {
-  title: 'Login | Auth',
-  description: 'Login | Auth',
+  title: 'Iniciar Sesión',
+  description: 'Iniciar Sesión',
 };
 
 export default function Login() {

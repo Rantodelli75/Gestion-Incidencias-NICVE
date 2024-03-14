@@ -13,16 +13,16 @@ const Form = () => {
   return (
     <div className='w-full max-w-md'>
       <div className='mb-5'>
-        <h2 className='text-2xl font-semibold'>olvido su contraseña?</h2>
+        <h2 className='text-2xl font-semibold'>¿Olvidó su contraseña?</h2>
         <p className='text-gray-500 text-sm'>
-          Ingrese su correo y contraseña 
+          Ingrese su correo 
         </p>
       </div>
       <form className='w-full'>
         <Input type='text' placeholder='Email' />
         <Button type='submit' label='Enviar correo' />
         <div className='mt-5 mb-5 flex items-center justify-center gap-x-2'>
-          <p className='text-gray-500'>tienes una cuenta?</p>
+          <p className='text-gray-500'>¿Tienes una cuenta?</p>
           <button
             type='button'
             onClick={() => router.push('/auth/login')}
@@ -32,13 +32,13 @@ const Form = () => {
           </button>
         </div>
         <div className='flex items-center justify-center gap-x-2'>
-          <p className='text-gray-500'>no tienes una cuenta?</p>
+          <p className='text-gray-500'>¿No tienes una cuenta?</p>
           <button
             type='button'
             onClick={() => router.push('/auth/register')}
             className='font-semibold hover:text-primary transition-colors duration-300'
           >
-            Registrarte
+            Regístrate
           </button>
         </div>
       </form>
