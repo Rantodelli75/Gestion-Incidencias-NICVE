@@ -43,7 +43,7 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   Bajo: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["date", "role", "status", "actions"];
 
 type User = typeof users[0];
 
@@ -108,7 +108,7 @@ export default function App() {
     const cellValue = user[columnKey as keyof User];
 
     switch (columnKey) {
-      case "name":
+      case "date":
         return (
             <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
@@ -188,7 +188,7 @@ export default function App() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Buscar analista..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -237,53 +237,61 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Popover placement="right">
-                <PopoverTrigger>
-                  <Button className="bg-blue-500 text-blue-50">Nueva</Button>
-                </PopoverTrigger>
-              <PopoverContent>
-                <div className="px-1 py-2">
-                <Textarea
-                  label="Analista que reporta"
-                  placeholder="Ingrese el nombre del analista"
-                  className="max-w-xs"
-                />
-                <Select
-                    items={incidencias}
-                    label="Tipo de incidencia"
-                    placeholder="Seleccione el tipo de incidencia"
-                    className="max-w-xs mt-3"
-                  >
-                    {(incidencia) => <SelectItem key={incidencia.value}>{incidencia.label}</SelectItem>}
-                  </Select>
-                <Textarea
-                  label="Descripcion"
-                  placeholder="Ingrese una descripcion de la incidencia"
-                  className="max-w-xs mt-3"
-                />
-                  <Select
-                    items={servicios}
-                    label="Servicios Afectados"
-                    placeholder="Seleccione el servicio afectado"
-                    className="max-w-xs mt-3"
-                  >
-                    {(servicio) => <SelectItem key={servicio.value}>{servicio.label}</SelectItem>}
-                  </Select>
-                  <Select
-                    items={impactos}
-                    label="Impacto"
-                    placeholder="Seleccione el nivel de impacto"
-                    className="max-w-xs mt-3"
-                  >
-                    {(impacto) => <SelectItem key={impacto.value}>{impacto.label}</SelectItem>}
-                  </Select>
-                  <Button color="primary" className="">
-                    Agregar
-                  </Button>
-                  <div className="text-tiny">Reporte de nueva incidencia</div>
-                </div>
+
+            {/*CAJA PARA AGREGAR NUEVA INCIDENCIA*/}
+            
+            <Popover placement="bottom" showArrow offset={10}>
+              <PopoverTrigger>
+                <Button color="primary">Agregar</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[400px]">
+                {(titleProps) => (
+                  <div className="px-1 py-2 w-full">
+                    <p className="text-small font-bold text-foreground" {...titleProps}>
+                      Nueva Incidencia
+                    </p>
+                  <div className="mt-2 flex flex-col gap-2 w-full">
+                    <Input placeholder="Nombre del Analista" label="Analista" size="sm" variant="bordered" />
+                    <Select
+                      items={incidencias}
+                      label="Tipo de incidencia"
+                      placeholder="Seleccione la incidencia ocacionada"
+                      className="w-auto"
+                      variant="bordered"
+                    >
+                      {(incidencias) => <SelectItem key={incidencias.value}>{incidencias.label}</SelectItem>}
+                    </Select>
+                    <Textarea
+                      label="Descripcion"
+                      placeholder="Ingrese una descripcion del problema"
+                      className="w-auto"
+                      variant="bordered"
+                    />
+                    <Select
+                      items={servicios}
+                      label="Servicio afectado"
+                      placeholder="Seleccione el servicio afectado"
+                      className="w-auto"
+                      variant="bordered"
+                    >
+                      {(servicios) => <SelectItem key={servicios.value}>{servicios.label}</SelectItem>}
+                    </Select>
+                    <Input placeholder="Indique las areas afectadas" label="Areas afectadas" size="sm" variant="bordered" />
+                    <Select
+                        items={impactos}
+                        label="Nivel de impacto"
+                        placeholder="Seleccione el nivel de impacto"
+                        className="w-auto"
+                        variant="bordered"                    
+                        >
+                          {(impactos) => <SelectItem key={impactos.value}>{impactos.label}</SelectItem>}
+                    </Select>
+                    <Button color="primary">Agregar</Button>
+                  </div>
+                  </div>
+                )}
               </PopoverContent>
-             </Popover>
+              </Popover>
           </div>
         </div>
         <div className="flex justify-between items-center">
