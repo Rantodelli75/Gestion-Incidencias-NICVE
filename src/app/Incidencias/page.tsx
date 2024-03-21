@@ -2,9 +2,11 @@
 
 import {Textarea} from "@nextui-org/react";
 import {Select, SelectItem} from "@nextui-org/react";
+import {status} from "./componentes/status"
 import {servicios} from "./componentes/servicios";
 import {incidencias} from "./componentes/tipo_incidencia";
 import {impactos} from "./componentes/impacto";
+import {Analista} from "./componentes/analista";
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
 import React from "react";
 
@@ -33,19 +35,20 @@ import {PlusIcon} from "./PlusIcon";
 import {VerticalDotsIcon} from "./VerticalDotsIcon";
 import {ChevronDownIcon} from "./ChevronDownIcon";
 import {SearchIcon} from "./SearchIcon";
-import {columns, users, statusOptions} from "./data";
+import {columns, users, impactoOptions} from "./data";
 import {capitalize} from "./utils";
 import { Red_Hat_Mono } from "next/font/google";
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  Alto: "success",
+const impactoColorMap: Record<string, ChipProps["color"]> = {
+  Alto: "danger",
   Medio: "danger",
   Bajo: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["date", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["date", "role", "impacto", "actions"];
 
 type User = typeof users[0];
+
 
 export default function App() {
   const [filterValue, setFilterValue] = React.useState("");
@@ -76,9 +79,9 @@ export default function App() {
         user.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+    if (statusFilter !== "all" && Array.from(statusFilter).length !== impactoOptions.length) {
       filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status),
+        Array.from(statusFilter).includes(user.impacto),
       );
     }
 
@@ -122,9 +125,9 @@ export default function App() {
             <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
           </div>
         );
-      case "status":
+      case "impacto":
         return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
+          <Chip className="capitalize" color={impactoColorMap[user.impacto]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
@@ -197,7 +200,7 @@ export default function App() {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button className="mt-3" endContent={<ChevronDownIcon className="text-small " />} variant="flat">
                   Impacto
                 </Button>
               </DropdownTrigger>
@@ -209,7 +212,7 @@ export default function App() {
                 selectionMode="multiple"
                 onSelectionChange={setStatusFilter}
               >
-                {statusOptions.map((status) => (
+                {impactoOptions.map((status) => (
                   <DropdownItem key={status.uid} className="capitalize">
                     {capitalize(status.name)}
                   </DropdownItem>
@@ -218,7 +221,7 @@ export default function App() {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button className="mt-3" endContent={<ChevronDownIcon className="text-small" />} variant="flat">
                   Columnas
                 </Button>
               </DropdownTrigger>
@@ -242,7 +245,7 @@ export default function App() {
             
             <Popover placement="bottom" showArrow offset={10}>
               <PopoverTrigger>
-                <Button color="primary">Agregar</Button>
+                <Button className="mt-3" color="primary">Agregar</Button>
               </PopoverTrigger>
               <PopoverContent className="w-[400px]">
                 {(titleProps) => (
@@ -250,13 +253,25 @@ export default function App() {
                     <p className="text-small font-bold text-foreground" {...titleProps}>
                       Nueva Incidencia
                     </p>
+
                   <div className="mt-2 flex flex-col gap-2 w-full">
-                    <Input placeholder="Nombre del Analista" label="Analista" size="sm" variant="bordered" />
+                    <Input type="date"></Input>
+                    <Input type="date" min="20-02-2024" color="primary" className="w-auto cursor-pointe"></Input>
+                    <Input type="time" color="primary" className="cursor-pointer"></Input>
+                    <Select
+                      items={Analista}
+                      label="Tipo de incidencia"
+                      placeholder="Seleccione la incidencia ocacionada"
+                      className="w-auto font-bold	"
+                      variant="bordered"
+                    >
+                      {(Analista) => <SelectItem key={Analista.value}>{Analista.label}</SelectItem>}
+                    </Select>                
                     <Select
                       items={incidencias}
                       label="Tipo de incidencia"
                       placeholder="Seleccione la incidencia ocacionada"
-                      className="w-auto"
+                      className="w-auto font-bold	"
                       variant="bordered"
                     >
                       {(incidencias) => <SelectItem key={incidencias.value}>{incidencias.label}</SelectItem>}
@@ -264,24 +279,33 @@ export default function App() {
                     <Textarea
                       label="Descripcion"
                       placeholder="Ingrese una descripcion del problema"
-                      className="w-auto"
+                      className="w-auto font-bold	"
                       variant="bordered"
                     />
                     <Select
                       items={servicios}
                       label="Servicio afectado"
                       placeholder="Seleccione el servicio afectado"
-                      className="w-auto"
+                      className="w-auto font-bold	"
                       variant="bordered"
                     >
                       {(servicios) => <SelectItem key={servicios.value}>{servicios.label}</SelectItem>}
                     </Select>
-                    <Input placeholder="Indique las areas afectadas" label="Areas afectadas" size="sm" variant="bordered" />
+                    <Input placeholder="Indique las areas afectadas" label="Areas afectadas" size="sm" variant="bordered" className="font-bold	" />
+                    <Select
+                        items={status}
+                        label="Status"
+                        placeholder="Seleccione el nivel de status"
+                        className="w-auto font-bold	"
+                        variant="bordered"                    
+                        >
+                          {(status) => <SelectItem key={status.value}>{status.label}</SelectItem>}
+                    </Select>
                     <Select
                         items={impactos}
                         label="Nivel de impacto"
                         placeholder="Seleccione el nivel de impacto"
-                        className="w-auto"
+                        className="w-auto font-bold	"
                         variant="bordered"                    
                         >
                           {(impactos) => <SelectItem key={impactos.value}>{impactos.label}</SelectItem>}
@@ -294,6 +318,8 @@ export default function App() {
               </Popover>
           </div>
         </div>
+
+
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">Total {users.length} incidencias</span>
           <label className="flex items-center text-default-400 text-small">
@@ -320,6 +346,7 @@ export default function App() {
             ? "All items selected"
             : `${selectedKeys.size} de ${filteredItems.length} seleccionado`}
         </span>
+        <div className="justify-center">
         <Pagination
           isCompact
           showControls
@@ -329,17 +356,10 @@ export default function App() {
           total={pages}
           onChange={setPage}
         />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
-            Anterior
-          </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
-            Siguiente
-          </Button>
         </div>
       </div>
     );
-  }, [selectedKeys, filteredItems.length, page, pages, onPreviousPage, onNextPage]);
+  }, [selectedKeys, filteredItems.length, page, pages]);
 
   return (
     <Table

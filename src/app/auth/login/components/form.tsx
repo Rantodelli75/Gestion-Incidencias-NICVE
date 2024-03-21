@@ -29,7 +29,7 @@ const Form = () => {
             olvido su contraseña?
           </button>
         </div>
-        <Button type='submit' label='Inciar sesion' />
+        <Button type='submit' label='Iniciar sesion' />
         <div className='mt-5 mb-10 flex items-center justify-center gap-x-2'>
           <p className='text-gray-500'>No tienes cuenta?</p>
           <button
@@ -43,7 +43,7 @@ const Form = () => {
         <div className='mb-5'>
           <hr className='border-2' />
           <div className='flex justify-center'>
-            <span className='bg-white px-8 -mt-3'>or</span>
+            <span className='bg-white px-8 -mt-3'></span>
           </div>
         </div>
       </form>
