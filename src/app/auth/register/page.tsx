@@ -3,8 +3,8 @@ import Logo from '@/app/components/shared/logo';
 import Form from './components/form';
 
 export const metadata: Metadata = {
-  title: 'Register | Auth',
-  description: 'Register | Auth',
+  title: 'Registrar Usuario',
+  description: 'Registro de Usuario',
 };
 
 export default function Register() {
